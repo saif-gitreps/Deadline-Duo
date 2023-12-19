@@ -39,10 +39,28 @@ header nav ul li a,
    letter-spacing: 1px;
 }
 
-header nav ul li a:hover,
-.navbar-extra a:hover {
+header nav ul li a:hover {
    /* default letter hover colour */
    color: #f09433;
+}
+
+.navbar-extra a::before {
+   margin-left: auto;
+}
+
+.navbar-extra a::after,
+button::before {
+   content: "";
+   width: 0%;
+   height: 2px;
+   background: #f09433;
+   display: block;
+   transition: 0.5s;
+}
+
+.navbar-extra a:hover::after,
+.navbar-extra a:hover::before {
+   width: 100%;
 }
 
 footer {
