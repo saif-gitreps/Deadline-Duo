@@ -1,20 +1,48 @@
 body {
    /* default black background */
    background-color: #424242;
+   padding: 0;
+   margin: 0;
 }
 header nav {
+   background-color: rgba(0, 0, 0, 0.9);
    display: flex;
-   justify-content: space-evenly;
+   justify-content: space-between;
    align-items: center;
+   padding: 0.2rem 2rem;
+   box-sizing: border-box;
+   box-shadow: 0 15px 5px rgba(0, 0, 0, 0.6);
+   border-radius: 3px;
 }
 
 header nav ul {
    list-style: none;
    display: flex;
    flex-direction: row;
-   justify-content: center;
    align-items: center;
    padding: 0;
+}
+
+header nav ul li {
+   padding: 0 1rem;
+}
+
+header nav ul li a,
+.navbar-extra a {
+   text-decoration: none;
+   color: #fff;
+   font-size: 1.2rem;
+   font-weight: 600;
+   transition: color 0.25s;
+   text-align: center;
+   font-weight: bold;
+   letter-spacing: 1px;
+}
+
+header nav ul li a:hover,
+.navbar-extra a:hover {
+   /* default letter hover colour */
+   color: #f09433;
 }
 
 footer {
