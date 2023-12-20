@@ -14,7 +14,7 @@ header nav {
    box-sizing: border-box;
    box-shadow: 0 15px 5px rgba(0, 0, 0, 0.6);
    border-radius: 3px;
-   margin-bottom: 3rem;
+   margin-bottom: 2.5rem;
 }
 
 header nav ul {
@@ -95,10 +95,11 @@ button::before {
    position: relative;
 }
 
-.login-box .user-box input {
+.login-box .user-box input,
+.date-box input {
    width: 100%;
    padding: 10px 0;
-   font-size: 16px;
+   font-size: 1rem;
    color: #fff;
    margin-bottom: 30px;
    border: none;
@@ -112,7 +113,7 @@ button::before {
    top: 0;
    left: 0;
    padding: 10px 0;
-   font-size: 16px;
+   font-size: 1.2rem;
    color: #fff;
    pointer-events: none;
    transition: 0.3s;
@@ -124,6 +125,19 @@ button::before {
    left: 0;
    color: #fff;
    font-size: 12px;
+}
+
+.date-box input {
+   font-size: 1rem;
+}
+
+.date-box input::-webkit-calendar-picker-indicator {
+   filter: invert(1); /* Inverts the color of the icon */
+   font-size: 1.5rem;
+}
+
+.date-box input::-webkit-calendar-picker-indicator:hover {
+   cursor: pointer;
 }
 
 .login-box form a {
