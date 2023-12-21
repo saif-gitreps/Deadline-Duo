@@ -65,6 +65,13 @@ button::before {
    width: 100%;
 }
 
+/* Main */
+
+main {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+}
+
 /* Add deadline Card */
 
 .login-box {
