@@ -314,16 +314,3 @@ footer {
 }
 
 /* aside css */
-
-aside {
-   display: none;
-   height: 100vh;
-   width: 100vw;
-   background-color: black;
-}
-
-aside form {
-   position: absolute;
-   top: 20px;
-   left: 50px;
-}

@@ -15,23 +15,6 @@
       <script src="deadline-page.js" defer></script>
    </head>
    <body>
-      <aside>
-         <div class="login-box">
-            <p>Add a deadline</p>
-            <form>
-               <div class="user-box">
-                  <input required="" name="" type="text" />
-                  <label>Title</label>
-               </div>
-               <div class="date-box">
-                  <input type="datetime-local" id="datetime" name="datetime" />
-               </div>
-               <div class="user-box">
-                  <button class="btn">+ Add Deadline</button>
-               </div>
-            </form>
-         </div>
-      </aside>
       <header>
          <nav>
             <div class="default-button">
@@ -68,7 +51,7 @@
          <!-- All the deadline cards ejs will be added from here -->
          <div class="login-box">
             <p>Due:29 Nov 11:00PM</p>
-            <form>
+            <form class="deadline-card">
                <div class="user-box">
                   <input required="" name="" type="text" value="OS classtest" readonly />
                </div>
@@ -83,7 +66,12 @@
                </div>
                <div class="user-box">
                   <button class="btn" style="color: rgb(199, 37, 37)">X Delete</button>
-                  <button class="btn" style="padding-left: 1rem; padding-right: 1rem">
+                  <button
+                     type="button"
+                     id="edit-btn"
+                     class="btn"
+                     style="padding-left: 1rem; padding-right: 1rem"
+                  >
                      O Edit
                   </button>
                </div>
