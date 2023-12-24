@@ -127,8 +127,7 @@ main {
    position: relative;
 }
 
-.login-box .user-box input,
-.date-box input {
+.login-box .user-box input {
    width: 100%;
    padding: 10px 0;
    font-size: 1rem;
@@ -157,20 +156,6 @@ main {
    left: 0;
    color: #fff;
    font-size: 12px;
-}
-
-.date-box input {
-   font-size: 1rem;
-   padding: 0.3rem 0;
-}
-
-.date-box input::-webkit-calendar-picker-indicator {
-   filter: invert(1); /* Inverts the color of the icon */
-   font-size: 1.5rem;
-}
-
-.date-box input::-webkit-calendar-picker-indicator:hover {
-   cursor: pointer;
 }
 
 .login-box form a {
