@@ -224,17 +224,20 @@ textarea::-webkit-scrollbar-track {
    border-radius: 5px;
 }
 
+/* answewr card */
 /* mid rise responsive */
 
 @media screen and (min-width: 37.5rem) and (max-width: 70rem) {
-   main {
-      grid-template-columns: repeat(2, 1fr);
+   .login-box,
+   .card {
+      width: 45rem;
    }
 }
 
 @media screen and (max-width: 51.875rem) {
-   main {
-      /*  */
+   .login-box,
+   .card {
+      width: 30rem;
    }
    .dropdown {
       box-sizing: border-box;

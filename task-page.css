@@ -200,6 +200,62 @@ main {
    border-radius: 5px;
 }
 
+/* priority */
+
+.priority-checkbox {
+   display: flex;
+   justify-content: left;
+   align-items: center;
+   margin: 0 auto;
+   width: 100%;
+   height: 100%;
+   padding: 0;
+   box-sizing: border-box;
+   border: none;
+   outline: none;
+   background: transparent;
+}
+
+#priority-label {
+   color: white;
+   font-size: 1.2rem;
+   margin-top: 0.5rem;
+   padding-right: 0.5rem;
+}
+
+.rating:not(:checked) > input {
+   position: absolute;
+   appearance: none;
+}
+
+.rating:not(:checked) > label {
+   float: right;
+   cursor: pointer;
+   font-size: 30px;
+   color: #666;
+}
+
+.rating:not(:checked) > label:before {
+   content: "★";
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+   color: #f09433;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+   color: #f09433;
+}
+
+.rating > input:checked ~ label {
+   color: #f09433;
+}
+
 /* mid rise responsive */
 
 @media screen and (min-width: 37.5rem) and (max-width: 70rem) {
