@@ -256,6 +256,14 @@ main {
    color: #f09433;
 }
 
+/* Max screen and above */
+
+@media (min-width: 119rem) {
+   main {
+      grid-template-columns: repeat(4, 1fr);
+   }
+}
+
 /* mid rise responsive */
 
 @media screen and (min-width: 37.5rem) and (max-width: 70rem) {
