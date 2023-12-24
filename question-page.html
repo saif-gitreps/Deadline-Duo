@@ -12,7 +12,7 @@
       />
       <link rel="stylesheet" href="shared-css.css" />
       <link rel="stylesheet" href="question-page.css" />
-      <script src="deadline-page.js" defer></script>
+      <script src="question-page.js" defer></script>
    </head>
    <body>
       <header>
@@ -76,20 +76,20 @@
             </form>
          </div>
          <!-- All the deadline cards ejs will be added from here -->
+
          <div class="login-box">
-            <p>Due:29 Nov 11:00PM</p>
+            <p>
+               Q: What is the difference between allocation and deallocation of the
+               writers program ?
+            </p>
             <form class="deadline-card">
                <div class="user-box">
-                  <input required="" name="" type="text" value="OS classtest" readonly />
+                  <input required="" name="" type="text" value="" readonly />
                </div>
                <div class="user-box">
-                  <input
-                     required=""
-                     name=""
-                     type="text"
-                     value="Time left: 13 days 12hours"
-                     readonly
-                  />
+                  <textarea name="" id="answer" cols="40" rows="6" readonly class="hide">
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos cum neque quis aliquid culpa quos modi exercitationem fuga, porro voluptatum laborum recusandae blanditiis error, nihil consectetur illo labore? Aliquid, nihil! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta nostrum ipsa obcaecati magnam, quod incidunt error aliquam odio illo, alias, iste voluptates adipisci rem perferendis officia tenetur optio dolor libero.</textarea
+                  >
                </div>
                <div class="user-box">
                   <button class="btn" style="color: rgb(199, 37, 37)">X Delete</button>
@@ -101,24 +101,38 @@
                   >
                      O Edit
                   </button>
+                  <button type="button" class="btn" id="hide-btn">Show Answer</button>
                </div>
             </form>
          </div>
-         <div class="card">
-            <div class="first-content" class="login-box">
-               <h1 style="color: aliceblue">What is the biggest animal in the world</h1>
-            </div>
-            <div class="second-content">
-               <span>Second</span>
-            </div>
-         </div>
-         <div class="card">
-            <div class="first-content">
-               <span>First</span>
-            </div>
-            <div class="second-content">
-               <span>Second</span>
-            </div>
+
+         <div class="login-box">
+            <p>
+               Q: What is the difference between allocation and deallocation of the
+               writers program ?
+            </p>
+            <form class="deadline-card">
+               <div class="user-box">
+                  <input required="" name="" type="text" value="" readonly />
+               </div>
+               <div class="user-box">
+                  <textarea name="" id="answer" cols="40" rows="6" readonly class="hide">
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos cum neque quis aliquid culpa quos modi exercitationem fuga, porro voluptatum laborum recusandae blanditiis error, nihil consectetur illo labore? Aliquid, nihil! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta nostrum ipsa obcaecati magnam, quod incidunt error aliquam odio illo, alias, iste voluptates adipisci rem perferendis officia tenetur optio dolor libero.</textarea
+                  >
+               </div>
+               <div class="user-box">
+                  <button class="btn" style="color: rgb(199, 37, 37)">X Delete</button>
+                  <button
+                     type="button"
+                     id="edit-btn"
+                     class="btn"
+                     style="padding-left: 1rem; padding-right: 1rem"
+                  >
+                     O Edit
+                  </button>
+                  <button type="button" class="btn" id="hide-btn">Show Answer</button>
+               </div>
+            </form>
          </div>
       </main>
       <footer></footer>

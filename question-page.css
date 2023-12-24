@@ -224,6 +224,10 @@ textarea::-webkit-scrollbar-track {
    border-radius: 5px;
 }
 
+.hide {
+   display: none;
+}
+
 /* answewr card */
 /* mid rise responsive */
 
