@@ -146,10 +146,10 @@ main {
 
 .login-box .user-box input:focus ~ label,
 .login-box .user-box input:valid ~ label {
-   top: -20px;
+   top: -1.8rem;
    left: 0;
    color: #fff;
-   font-size: 12px;
+   font-size: 1rem;
 }
 
 .date-box input {
@@ -164,6 +164,12 @@ main {
 
 .date-box input::-webkit-calendar-picker-indicator:hover {
    cursor: pointer;
+}
+.date-box label {
+   top: -1.8rem;
+   left: 0;
+   color: #fff;
+   font-size: 1rem;
 }
 
 .login-box form a {
