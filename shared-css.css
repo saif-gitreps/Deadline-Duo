@@ -19,6 +19,90 @@ a {
 .user-box {
    display: flex;
 }
+/* shared codes for nav bar */
+
+header nav section,
+aside {
+   background-color: rgba(0, 0, 0, 0.9);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0.2rem 2rem;
+   box-sizing: border-box;
+   box-shadow: 0 15px 5px rgba(0, 0, 0, 0.6);
+   border-radius: 3px;
+   margin-bottom: 2.5rem;
+}
+
+header nav ul {
+   list-style: none;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding: 0;
+}
+
+header nav ul li {
+   padding: 0 1rem;
+}
+
+header nav ul li a,
+.default-button a,
+aside ul a {
+   text-decoration: none;
+   color: #fff;
+   font-size: 1.2rem;
+   font-weight: 600;
+   transition: color 0.25s;
+   text-align: center;
+   font-weight: bold;
+   letter-spacing: 1px;
+}
+
+header nav ul li a:hover {
+   /* default letter hover colour */
+   color: #f09433;
+}
+
+aside a:hover {
+   color: #f09433;
+}
+
+.dropdown {
+   display: none;
+}
+
+.dropdown-content {
+   display: none;
+   background-color: #f9f9f9;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+   background-color: #272727;
+   display: block;
+   padding: 12px 16px;
+   text-decoration: none;
+}
+.default-button a::before {
+   margin-left: auto;
+}
+
+.default-button a::after,
+button::before {
+   content: "";
+   width: 0%;
+   height: 2px;
+   background: #f09433;
+   display: block;
+   transition: 0.5s;
+}
+
+.default-button a:hover::after,
+.default-button a:hover::before {
+   width: 100%;
+}
 
 /* typical button */
 
@@ -40,4 +124,34 @@ a {
 
 button:hover {
    color: #f09433;
+}
+
+/* aside responsiveness */
+
+@media screen and (max-width: 51.875rem) {
+   .dropdown {
+      box-sizing: border-box;
+      margin: 0 auto;
+      display: block;
+      width: auto;
+   }
+   aside ul {
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1rem;
+      padding: 0;
+   }
+   aside ul li {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+   }
+   aside ul li a {
+      font-size: 1.5rem;
+   }
+   header nav section {
+      display: none;
+   }
 }
