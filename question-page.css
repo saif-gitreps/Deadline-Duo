@@ -9,62 +9,10 @@ main {
 
 .login-box {
    width: 60rem;
-   padding: 40px;
-   margin: 1.2rem auto;
-   background: rgba(0, 0, 0, 0.9);
-   box-sizing: border-box;
-   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-   border-radius: 10px;
-}
-
-.login-box p:first-child {
-   margin: 0 0 2rem;
-   padding: 0;
-   color: #fff;
-   text-align: center;
-   font-size: 2rem;
-   font-weight: bold;
-   letter-spacing: 1px;
-}
-
-.login-box .user-box {
-   position: relative;
-}
-
-.login-box .user-box input,
-.login-box .user-box textarea {
-   width: 100%;
-   padding: 10px 0;
-   font-size: 1rem;
-   color: #fff;
-   margin-bottom: 30px;
-   border: none;
-   border-bottom: 1px solid #fff;
-   outline: none;
-   background: transparent;
 }
 
 .login-box .user-box textarea {
    font-size: 1.3rem;
-}
-
-.login-box .user-box label {
-   position: absolute;
-   top: 0;
-   left: 0;
-   padding: 10px 0;
-   font-size: 1.2rem;
-   color: #fff;
-   pointer-events: none;
-   transition: 0.3s;
-}
-
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
-   top: -20px;
-   left: 0;
-   color: #fff;
-   font-size: 12px;
 }
 
 textarea {
