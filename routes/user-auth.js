@@ -5,5 +5,19 @@ const bcrypt = require("bcrypt");
 const protectRoute = require("../middlewares/route-protection-middleware");
 
 router.get("/", function (req, res) {
-   res.render("login");
+   let sessionInputData = req.session.inputData;
+
+   if (!sessionInputData) {
+      sessionInputData = {
+         hasError: false,
+         email: "",
+         password: "",
+      };
+   }
+   req.session.inputData = null;
+   res.render("login", {
+      inputData: sessionInputData,
+   });
 });
+
+module.exports = router;
