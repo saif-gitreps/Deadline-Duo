@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const csurf = require("tiny-csrf");
 
 const userAuthRoutes = require("./routes/user-auth");
+const { env } = require("process");
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(express.static("public"));
 const MongoDBStore = mongodbStore(session);
 
 const sessionStore = new MongoDBStore({
-   uri: "mongodb://localhost:27017",
+   uri: process.env.MONGO_URI,
    databaseName: "deadline-duo",
    collection: "sessions",
 });

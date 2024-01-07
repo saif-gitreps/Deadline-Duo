@@ -20,6 +20,7 @@
       "mongodb": "^6.3.0",
       "mongoose": "^8.0.3",
       "nodemon": "^3.0.2",
+      "prettier": "^3.1.1",
       "session": "^0.1.0",
       "tiny-csrf": "^1.1.3"
    }

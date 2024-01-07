@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-
-// first object is datatype
-// second is timestamp which says when the data was created or updated
+require("dotenv").config();
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI);
 
 const userSchema = new mongoose.Schema(
    {
