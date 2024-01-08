@@ -45,45 +45,46 @@ async function submitLogin(req, res) {
 
    let existingUser;
    try {
-      existingUser = await db.getDb().collection("users").findOne({ email: email });
-   } catch (error) {
-      return res.send("Error: " + error);
-   }
-   if (!existingUser) {
-      req.session.inputData = {
-         message: "Could not log you in ! please check your credentials!",
-         hasError: true,
-         email: email,
-         password: password,
-      };
-      req.session.save(function () {
-         res.redirect("/login");
+      existingUser = await User.findOne({ email: email });
+      if (!existingUser) {
+         req.session.inputData = {
+            message: "Could not log you in! please check your credentials!",
+            hasError: true,
+            email: email,
+            password: password,
+         };
+         req.session.save(function () {
+            res.redirect("/");
+         });
          return;
-      });
-   }
-   const comparePassword = await bcrypt.compare(password, existingUser.password);
-   if (!comparePassword) {
-      req.session.inputData = {
-         message: "Could not log you in ! please check your credentials!",
-         hasError: true,
-         email: email,
-         password: password,
+      }
+      const comparePassword = await bcrypt.compare(password, existingUser.password);
+      if (!comparePassword) {
+         req.session.inputData = {
+            message: "Could not log you in! please check your credentials!",
+            hasError: true,
+            email: email,
+            password: password,
+         };
+         req.session.save(function () {
+            res.redirect("/");
+         });
+         return;
+      }
+      req.session.user = {
+         _id: existingUser._id,
+         name: existingUser.name,
+         email: existingUser.email,
       };
-      req.session.save(function () {
-         res.redirect("/");
-      });
-      return;
-   }
-   req.session.user = {
-      _id: existingUser._id,
-      name: existingUser.name,
-      email: existingUser.email,
-   };
-   req.session.isAuthenticated = true;
+      req.session.isAuthenticated = true;
 
-   req.session.save(function () {
-      return res.redirect("/deadline");
-   });
+      req.session.save(function () {
+         return res.redirect("/deadline");
+      });
+   } catch (error) {
+      console.log(error);
+      return res.redirect("/");
+   }
 }
 
 async function submitSignUp(req, res) {
