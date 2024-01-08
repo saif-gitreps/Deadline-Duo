@@ -44,25 +44,13 @@ app.use(
 
 app.use(csurf("123456789iamasecret987654321look"));
 
-
 app.use(authorize);
 
 app.use(userAuthRoutes);
 app.use(deadlineRoutes);
 
-app.get("/403", (req, res) => {
-   //for unauthorized access
-   res.status(403).render("403");
-});
-
-app.get("/404", (req, res) => {
-   //for invalid route
-   res.render("404");
-});
-
-app.get("/401", (req, res) => {
-   //for invalid credentials
-   res.status(401).render("401");
+app.use(function (error, req, res, next) {
+   res.render("500");
 });
 
 db.connectToDatabase().then(function () {

@@ -79,15 +79,17 @@ async function submitLogin(req, res) {
       req.session.isAuthenticated = true;
 
       req.session.save(function () {
-         return res.redirect("/deadline");
+         res.redirect("/deadline");
       });
+      return;
    } catch (error) {
       console.log(error);
+      next(error);
       return res.redirect("/");
    }
 }
 
-async function submitSignUp(req, res) {
+async function submitSignUp(req, res, next) {
    const submitDetails = { ...req.body };
 
    if (
@@ -135,6 +137,7 @@ async function submitSignUp(req, res) {
       return res.redirect("/");
    } catch (error) {
       console.log(error);
+      next(error);
       return res.redirect("/signup");
    }
 }
@@ -153,4 +156,5 @@ module.exports = {
    getSignUp: getSignUp,
    submitLogin: submitLogin,
    submitSignUp: submitSignUp,
+   logout: logout,
 };

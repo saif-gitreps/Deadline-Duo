@@ -189,6 +189,10 @@ button::before {
    color: rgb(241, 18, 18);
 }
 
+.logout-form:hover {
+   cursor: pointer;
+}
+
 button:hover {
    color: #f09433;
 }

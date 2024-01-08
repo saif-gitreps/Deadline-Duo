@@ -7,4 +7,6 @@ router.use(protectRoute);
 
 router.get("/deadline", deadlineController.getDeadlinePage);
 
+router.post("/deadline", deadlineController.submitDeadline);
+
 module.exports = router;
