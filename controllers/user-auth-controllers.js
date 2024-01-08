@@ -1,4 +1,4 @@
-const db = require("../data/database");
+// Description: This file contains the controllers for user authentication.
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
@@ -138,6 +138,16 @@ async function submitSignUp(req, res) {
       return res.redirect("/signup");
    }
 }
+
+function logout(req, res) {
+   req.session.isAuthenticated = false;
+   req.session.user = null;
+   req.session.save(function () {
+      res.redirect("/");
+   });
+   return;
+}
+
 module.exports = {
    getLogin: getLogin,
    getSignUp: getSignUp,
