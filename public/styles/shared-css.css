@@ -185,6 +185,10 @@ button::before {
    transition: all 0.5s;
 }
 
+.error-message {
+   color: rgb(241, 18, 18);
+}
+
 button:hover {
    color: #f09433;
 }

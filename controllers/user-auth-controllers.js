@@ -90,13 +90,12 @@ async function submitSignUp(req, res) {
    const submitDetails = { ...req.body };
 
    if (
-      !submitDetails.name ||
-      !submitDetails.email ||
-      !submitDetails.password ||
-      !submitDetails.confirmpassword ||
-      !submitDetails.email.includes("@") ||
-      submitDetails.password.trim().length < 6 ||
-      submitDetails.password !== submitDetails.confirmpassword
+      !validateSignUp(
+         submitDetails.name,
+         submitDetails.email,
+         submitDetails.password,
+         submitDetails.confirmpassword
+      )
    ) {
       req.session.inputData = {
          message: "Invalid input! Please enter valid credentials",
@@ -105,45 +104,36 @@ async function submitSignUp(req, res) {
          email: submitDetails.email,
       };
       req.session.save(function () {
-         console.log("error in validation");
          res.redirect("/signup");
       });
       return;
    }
-   let existingUser;
    try {
-      existingUser = await User.findOne({ email: submitDetails.email });
-   } catch (error) {
-      console.log(error);
-      console.log("error in finding user");
-      res.redirect("/signup");
-      return;
-   }
+      const existingUser = await User.findOne({ email: submitDetails.email });
 
-   if (existingUser) {
-      req.session.inputData = {
-         message: "Account already exists! Please enter unique credentials.",
-         hasError: true,
-         name: submitDetails.name,
-         email: submitDetails.email,
-      };
-      req.session.save(function () {
-         res.redirect("/signup");
-      });
-      return;
-   }
-   try {
+      if (existingUser) {
+         req.session.inputData = {
+            message: "Account already exists! Please login",
+            hasError: true,
+            name: submitDetails.name,
+            email: submitDetails.email,
+         };
+         req.session.save(function () {
+            res.redirect("/signup");
+         });
+         return;
+      }
       const hashedPassword = await bcrypt.hash(submitDetails.password, 12);
-      await db.getDb().collection("users").insertOne({
+      const user = new User({
          name: submitDetails.name,
          email: submitDetails.email,
          password: hashedPassword,
          joindate: new Date(),
       });
+      await user.save();
       return res.redirect("/");
    } catch (error) {
       console.log(error);
-      console.log("error in inserting user");
       return res.redirect("/signup");
    }
 }
