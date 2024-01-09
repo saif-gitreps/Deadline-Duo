@@ -49,6 +49,10 @@ app.use(authorize);
 app.use(userAuthRoutes);
 app.use(deadlineRoutes);
 
+app.get("/500", function (req, res) {
+   res.render("500");
+});
+
 app.use(function (error, req, res, next) {
    res.render("500");
 });

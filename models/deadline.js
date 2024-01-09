@@ -3,7 +3,7 @@ const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 const mongoURI = process.env.LOCAL_URI;
 const User = require("./user");
-mongoose.connect(mongoURI);
+mongoose.connect("mongodb://localhost:27017/deadline-duo");
 
 const deadlineSchema = new mongoose.Schema(
    {
