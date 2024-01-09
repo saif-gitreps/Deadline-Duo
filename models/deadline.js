@@ -9,7 +9,7 @@ const deadlineSchema = new mongoose.Schema(
    {
       title: String,
       dueDate: Date,
-      timeLeft: String,
+      description: String,
       userId: {
          type: mongoose.Schema.Types.ObjectId,
          ref: "User",
