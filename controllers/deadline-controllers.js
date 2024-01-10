@@ -6,9 +6,20 @@ async function getDeadlinePage(req, res) {
    const deadlineErrorMessge = req.session.deadlineErrorMessge;
    const csrfToken = req.csrfToken();
    try {
-      const deadlines = await Deadline.find({ userId: req.session.user._id });
+      const deadlines = await Deadline.find({ userId: req.session.user._id })
+         .sort({ dueDate: 1 })
+         .exec();
       req.session.deadlineError = false;
       req.session.deadlineErrorMessge = null;
+      for (deadline of deadlines) {
+         const startDate = new Date();
+         const timeDifference = deadline.dueDate - startDate;
+         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+         const hoursDifference = Math.floor(
+            (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+         );
+         deadline.timeLeft = `${daysDifference} day(s) ${hoursDifference} hour(s)`;
+      }
       res.render("deadline-page", {
          userId: req.session.user._id,
          deadlines: deadlines,
