@@ -4,15 +4,15 @@ const Deadline = require("../models/deadline");
 async function getDeadlinePage(req, res) {
    const deadlineError = req.session.deadlineError;
    const deadlineErrorMessge = req.session.deadlineErrorMessge;
+   const csrfToken = req.csrfToken();
    try {
       const deadlines = await Deadline.find({ userId: req.session.user._id });
-      console.log(deadlines);
       req.session.deadlineError = false;
       req.session.deadlineErrorMessge = null;
       res.render("deadline-page", {
          userId: req.session.user._id,
          deadlines: deadlines,
-         csrfToken: req.csrfToken(),
+         csrfToken: csrfToken,
          deadlineError: deadlineError,
          deadlineErrorMessge: deadlineErrorMessge,
       });
@@ -45,9 +45,7 @@ async function submitDeadline(req, res, next) {
          userId: userId,
       });
       await newDeadline.save();
-      return res.json({
-         message: "Deadline added successfully",
-      });
+      return res.redirect("/deadline");
    } catch (error) {
       console.log(error);
       next(error);

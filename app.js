@@ -19,6 +19,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+app.use(express.json());
 
 const MongoDBStore = mongodbStore(session);
 
@@ -49,13 +50,17 @@ app.use(authorize);
 app.use(userAuthRoutes);
 app.use(deadlineRoutes);
 
-app.get("/500", function (req, res) {
-   res.render("500");
+app.get("/401", (req, res) => {
+   res.render("401");
 });
 
-app.use(function (error, req, res, next) {
-   res.render("500");
-});
+// app.get("/500", function (req, res) {
+//    res.render("500");
+// });
+
+// app.use(function (error, req, res, next) {
+//    res.render("500");
+// });
 
 db.connectToDatabase().then(function () {
    app.listen(3000);
