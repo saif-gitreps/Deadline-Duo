@@ -18,6 +18,13 @@ async function getDeadlinePage(req, res) {
          const hoursDifference = Math.floor(
             (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
          );
+         if (daysDifference <= 2) {
+            deadline.color = "#820300";
+         } else if (daysDifference <= 7) {
+            deadline.color = "#F05941";
+         } else {
+            deadline.color = "#030303";
+         }
          deadline.timeLeft = `${daysDifference} day(s) ${hoursDifference} hour(s)`;
       }
       res.render("deadline-page", {
