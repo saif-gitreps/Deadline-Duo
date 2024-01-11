@@ -26,7 +26,11 @@ async function getDeadlinePage(req, res) {
          } else {
             deadline.color = "#030303";
          }
-         deadline.timeLeft = `${daysDifference}d ${hoursDifference}h`;
+         if (daysDifference <= 0 && hoursDifference < 0) {
+            deadline.timeLeft = "Time over";
+         } else {
+            deadline.timeLeft = `${daysDifference}d ${hoursDifference}h`;
+         }
       }
       res.render("deadline-page", {
          userId: req.session.user._id,
