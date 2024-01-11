@@ -115,17 +115,20 @@ async function submitDeadlineEdit(req, res, next) {
    const title = req.body.title;
    const dueDate = req.body.dueDate;
    const description = req.body.description;
+   const deadlineId = new ObjectId(req.params.id);
+
    if (!title || !dueDate) {
       req.session.deadlineError = true;
       req.session.deadlineErrorMessge = "Please fill in all fields";
       req.session.save(function () {
-         res.redirect(`/deadline/{request.params.id}/edit`);
+         res.redirect(`/deadline/${req.params.id}/edit`);
       });
       return;
    }
+
    try {
       await Deadline.updateOne(
-         { _id: new ObjectId(req.params.id) },
+         { _id: deadlineId },
          {
             $set: {
                title: title,
@@ -134,7 +137,7 @@ async function submitDeadlineEdit(req, res, next) {
             },
          }
       );
-      res.redirect("/deadline");
+      return res.redirect("/deadline");
    } catch (error) {
       console.log(error);
       next(error);
