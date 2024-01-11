@@ -28,7 +28,6 @@ async function getDeadlinePage(req, res) {
             deadline.color = "#030303";
          }
          deadline.timeLeft = `${daysDifference}d ${hoursDifference}h`;
-         console.log(deadline);
       }
       res.render("deadline-page", {
          userId: req.session.user._id,
@@ -75,13 +74,12 @@ async function submitDeadline(req, res, next) {
 
 async function deleteDeadline(req, res, next) {
    const deadlineId = new ObjectId(req.params.id);
-   console.log(deadlineId);
    try {
       const deadline = await Deadline.findById({ _id: deadlineId });
       if (!deadline) {
          return res.redirect("/500");
       }
-      await deadline.remove();
+      await deadline.deleteOne();
       return res.redirect("/deadline");
    } catch (error) {
       console.log(error);
