@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.use(protectRoute);
 
-router.get("/task", taskController.getDeadlinePage);
+router.get("/task", taskController.getTaskPage);
 
-router.post("/task", taskController.submitDeadline);
+router.post("/task", taskController.submitTask);
 
-router.post("/task/:id/delete", taskController.deleteDeadline);
+router.post("/task/:id/delete", taskController.deleteTask);
 
 module.exports = router;

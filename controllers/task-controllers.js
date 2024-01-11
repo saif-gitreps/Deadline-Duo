@@ -1,39 +1,22 @@
-const Deadline = require("../models/deadline");
+const Task = require("../models/deadline");
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 
-async function getDeadlinePage(req, res) {
-   const deadlineError = req.session.deadlineError;
-   const deadlineErrorMessge = req.session.deadlineErrorMessge;
+async function getTaskPage(req, res, next) {
+   const taskError = req.session.taskError;
+   const taskErrorMessge = req.session.taskErrorMessge;
    const csrfToken = req.csrfToken();
    try {
-      const deadlines = await Deadline.find({ userId: req.session.user._id })
-         .sort({ dueDate: 1 })
-         .exec();
-      req.session.deadlineError = false;
-      req.session.deadlineErrorMessge = null;
-      for (deadline of deadlines) {
-         const startDate = new Date();
-         const timeDifference = deadline.dueDate - startDate;
-         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-         const hoursDifference = Math.floor(
-            (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-         );
-         if (daysDifference <= 2) {
-            deadline.color = "#6B240C";
-         } else if (daysDifference < 7) {
-            deadline.color = "#FF9000";
-         } else {
-            deadline.color = "#030303";
-         }
-         deadline.timeLeft = `${daysDifference}d ${hoursDifference}h`;
-      }
-      res.render("deadline-page", {
+      const tasks = await Task.find({ userId: req.session.user._id });
+      req.session.taskError = false;
+      req.session.taskErrorMessge = null;
+
+      res.render("task-page", {
          userId: req.session.user._id,
-         deadlines: deadlines,
+         tasks: tasks,
          csrfToken: csrfToken,
-         deadlineError: deadlineError,
-         deadlineErrorMessge: deadlineErrorMessge,
+         taskError: taskError,
+         taskErrorMessge: taskErrorMessge,
       });
       return;
    } catch (error) {
@@ -43,43 +26,39 @@ async function getDeadlinePage(req, res) {
    }
 }
 
-async function submitDeadline(req, res, next) {
+async function submitTask(req, res, next) {
    const userId = req.session.user._id;
    const title = req.body.title;
-   const dueDate = req.body.dueDate;
-   const description = req.body.description;
-   if (!title || !dueDate) {
-      req.session.deadlineError = true;
-      req.session.deadlineErrorMessge = "Please fill in all fields";
+   if (!title) {
+      req.session.taskError = true;
+      req.session.taskErrorMessge = "Please fill in the title";
       req.session.save(function () {
-         res.redirect("/deadline");
+         res.redirect("/task");
       });
       return;
    }
    try {
-      const newDeadline = new Deadline({
+      const newTask = new Task({
          title: title,
-         dueDate: dueDate,
-         description: description,
          userId: userId,
       });
-      await newDeadline.save();
-      return res.redirect("/deadline");
+      await newTask.save();
+      return res.redirect("/task");
    } catch (error) {
       console.log(error);
       next(error);
    }
 }
 
-async function deleteDeadline(req, res, next) {
-   const deadlineId = new ObjectId(req.params.id);
+async function deleteTask(req, res, next) {
+   const taskId = new ObjectId(req.params.id);
    try {
-      const deadline = await Deadline.findById({ _id: deadlineId });
-      if (!deadline) {
+      const task = await Task.findById({ _id: taskId });
+      if (!task) {
          return res.redirect("/500");
       }
-      await deadline.deleteOne();
-      return res.redirect("/deadline");
+      await task.deleteOne();
+      return res.redirect("/task");
    } catch (error) {
       console.log(error);
       next(error);
@@ -89,5 +68,5 @@ async function deleteDeadline(req, res, next) {
 module.exports = {
    getTaskPage: getTaskPage,
    submitTask: submitTask,
-   deletetask: deleteTask,
+   deleteTask: deleteTask,
 };
