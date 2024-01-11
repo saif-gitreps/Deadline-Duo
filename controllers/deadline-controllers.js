@@ -1,5 +1,7 @@
 const db = require("../data/database");
 const Deadline = require("../models/deadline");
+const mongodb = require("mongodb");
+const ObjectId = mongodb.ObjectId;
 
 async function getDeadlinePage(req, res) {
    const deadlineError = req.session.deadlineError;
@@ -26,6 +28,7 @@ async function getDeadlinePage(req, res) {
             deadline.color = "#030303";
          }
          deadline.timeLeft = `${daysDifference}d ${hoursDifference}h`;
+         console.log(deadline);
       }
       res.render("deadline-page", {
          userId: req.session.user._id,
@@ -70,7 +73,24 @@ async function submitDeadline(req, res, next) {
    }
 }
 
+async function deleteDeadline(req, res, next) {
+   const deadlineId = new ObjectId(req.params.id);
+   console.log(deadlineId);
+   try {
+      const deadline = await Deadline.findById({ _id: deadlineId });
+      if (!deadline) {
+         return res.redirect("/500");
+      }
+      await deadline.remove();
+      return res.redirect("/deadline");
+   } catch (error) {
+      console.log(error);
+      next(error);
+   }
+}
+
 module.exports = {
    getDeadlinePage: getDeadlinePage,
    submitDeadline: submitDeadline,
+   deleteDeadline: deleteDeadline,
 };

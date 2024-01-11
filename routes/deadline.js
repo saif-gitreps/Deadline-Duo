@@ -9,4 +9,6 @@ router.get("/deadline", deadlineController.getDeadlinePage);
 
 router.post("/deadline", deadlineController.submitDeadline);
 
+router.post("/deadline/delete/:id", deadlineController.deleteDeadline);
+
 module.exports = router;
