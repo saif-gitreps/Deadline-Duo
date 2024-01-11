@@ -11,4 +11,8 @@ router.post("/deadline", deadlineController.submitDeadline);
 
 router.post("/deadline/:id/delete", deadlineController.deleteDeadline);
 
+router.get("/deadline/:id/edit", deadlineController.editDeadlinePage);
+
+router.post("/deadline/:id/edit", deadlineController.submitDeadlineEdit);
+
 module.exports = router;
