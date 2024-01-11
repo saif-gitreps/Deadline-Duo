@@ -3,11 +3,9 @@ const mongoose = require("mongoose");
 const mongoURI = process.env.LOCAL_URI;
 mongoose.connect("mongodb://localhost:27017/deadline-duo");
 
-const deadlineSchema = new mongoose.Schema(
+const taskSchema = new mongoose.Schema(
    {
       title: String,
-      dueDate: Date,
-      description: String,
       userId: {
          type: mongoose.Schema.Types.ObjectId,
          ref: "User",
@@ -18,6 +16,6 @@ const deadlineSchema = new mongoose.Schema(
    }
 );
 
-const Deadline = mongoose.model("Deadline", deadlineSchema);
+const Task = mongoose.model("Task", TaskSchema);
 
-module.exports = Deadline;
+module.exports = Task;

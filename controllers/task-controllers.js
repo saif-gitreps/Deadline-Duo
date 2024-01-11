@@ -86,68 +86,8 @@ async function deleteDeadline(req, res, next) {
    }
 }
 
-async function editDeadlinePage(req, res, next) {
-   const deadlineError = req.session.deadlineError;
-   const deadlineErrorMessge = req.session.deadlineErrorMessge;
-   const deadlineId = new ObjectId(req.params.id);
-   const csrfToken = req.csrfToken();
-   try {
-      const deadline = await Deadline.findById({ _id: deadlineId });
-      if (!deadline) {
-         return res.redirect("/500");
-      }
-      req.session.deadlineError = false;
-      req.session.deadlineErrorMessge = null;
-      return res.render("deadline-edit", {
-         deadline: deadline,
-         csrfToken: csrfToken,
-         deadlineError: deadlineError,
-         deadlineErrorMessge: deadlineErrorMessge,
-      });
-   } catch (error) {
-      console.log(error);
-      next(error);
-   }
-}
-
-async function submitDeadlineEdit(req, res, next) {
-   const title = req.body.title;
-   const dueDate = req.body.dueDate;
-   const description = req.body.description;
-   // one thing i noticed is, it works without new objectId and with , so i ll just keep using it.
-   const deadlineId = new ObjectId(req.params.id);
-
-   if (!title || !dueDate) {
-      req.session.deadlineError = true;
-      req.session.deadlineErrorMessge = "Please fill in all fields";
-      req.session.save(function () {
-         res.redirect(`/deadline/${req.params.id}/edit`);
-      });
-      return;
-   }
-
-   try {
-      await Deadline.updateOne(
-         { _id: deadlineId },
-         {
-            $set: {
-               title: title,
-               dueDate: dueDate,
-               description: description,
-            },
-         }
-      );
-      return res.redirect("/deadline");
-   } catch (error) {
-      console.log(error);
-      next(error);
-   }
-}
-
 module.exports = {
-   getDeadlinePage: getDeadlinePage,
-   submitDeadline: submitDeadline,
-   deleteDeadline: deleteDeadline,
-   editDeadlinePage: editDeadlinePage,
-   submitDeadlineEdit: submitDeadlineEdit,
+   getTaskPage: getTaskPage,
+   submitTask: submitTask,
+   deletetask: deleteTask,
 };

@@ -11,6 +11,7 @@ const addCSRFtoken = require("./middlewares/CSRF-token-middleware");
 
 const userAuthRoutes = require("./routes/user-auth");
 const deadlineRoutes = require("./routes/deadline");
+const tasksRoutes = require("./routes/task");
 const { env } = require("process");
 
 const app = express();
@@ -48,6 +49,7 @@ app.use(csurf("123456789iamasecret987654321look"));
 app.use(authorize);
 app.use(userAuthRoutes);
 app.use(deadlineRoutes);
+app.use(tasksRoutes);
 
 app.get("/401", (req, res) => {
    res.render("401");
