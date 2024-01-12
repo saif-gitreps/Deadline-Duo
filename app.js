@@ -25,7 +25,7 @@ app.use(express.json());
 const MongoDBStore = mongodbStore(session);
 
 const sessionStore = new MongoDBStore({
-   uri: "mongodb://localhost:27017",
+   uri: process.env.MONGO_URI,
    databaseName: "deadline-duo",
    collection: "sessions",
 });
