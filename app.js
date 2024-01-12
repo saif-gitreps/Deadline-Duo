@@ -8,9 +8,10 @@ const cookieParser = require("cookie-parser");
 const csurf = require("tiny-csrf");
 const authorize = require("./middlewares/authentication-middleware");
 
+const questionRoutes = require("./routes/question");
 const userAuthRoutes = require("./routes/user-auth");
 const deadlineRoutes = require("./routes/deadline");
-const tasksRoutes = require("./routes/task");
+const taskRoutes = require("./routes/task");
 
 const app = express();
 
@@ -47,19 +48,20 @@ app.use(csurf("123456789iamasecret987654321look"));
 app.use(authorize);
 app.use(userAuthRoutes);
 app.use(deadlineRoutes);
-app.use(tasksRoutes);
+app.use(taskRoutes);
+app.use(questionRoutes);
 
 app.get("/401", (req, res) => {
    res.render("401");
 });
 
-app.get("/500", function (req, res) {
-   res.render("500");
-});
+// app.get("/500", function (req, res) {
+//    res.render("500");
+// });
 
-app.use(function (error, req, res, next) {
-   res.render("500");
-});
+// app.use(function (error, req, res, next) {
+//    res.render("500");
+// });
 
 db.connectToDatabase().then(function () {
    app.listen(3000);
