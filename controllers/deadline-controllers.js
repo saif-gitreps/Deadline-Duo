@@ -1,6 +1,9 @@
 const Deadline = require("../models/deadline");
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
+const calculateDaysLeft = require("../util/days-difference-calculator");
+const calculateHoursLeft = require("../util/hour-difference-calculator");
+const setColor = require("../util/set-card-colour");
 
 async function getDeadlinePage(req, res) {
    const deadlineError = req.session.deadlineError;
@@ -13,24 +16,11 @@ async function getDeadlinePage(req, res) {
       req.session.deadlineError = false;
       req.session.deadlineErrorMessge = null;
       for (deadline of deadlines) {
-         const startDate = new Date();
-         const timeDifference = deadline.dueDate - startDate;
-         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-         const hoursDifference = Math.floor(
-            (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-         );
-         if (daysDifference <= 2) {
-            deadline.color = "#6B240C";
-         } else if (daysDifference < 7) {
-            deadline.color = "#FF9000";
-         } else {
-            deadline.color = "#030303";
-         }
-         if (daysDifference <= 0 && hoursDifference < 0) {
-            deadline.timeLeft = "Time over";
-         } else {
-            deadline.timeLeft = `${daysDifference}d ${hoursDifference}h`;
-         }
+         const daysDiff = calculateDaysLeft(deadline.dueDate);
+         const hoursDiff = calculateHoursLeft(deadline.dueDate);
+         deadline.color = setColor(daysDiff);
+         deadline.timeLeft =
+            daysDiff <= 0 && hoursDiff < 0 ? "Time over" : `${daysDiff}d ${hoursDiff}h`;
       }
       res.render("deadline-page", {
          userId: req.session.user._id,

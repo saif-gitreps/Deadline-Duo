@@ -7,12 +7,10 @@ const mongodbStore = require("connect-mongodb-session");
 const cookieParser = require("cookie-parser");
 const csurf = require("tiny-csrf");
 const authorize = require("./middlewares/authentication-middleware");
-const addCSRFtoken = require("./middlewares/CSRF-token-middleware");
 
 const userAuthRoutes = require("./routes/user-auth");
 const deadlineRoutes = require("./routes/deadline");
 const tasksRoutes = require("./routes/task");
-const { env } = require("process");
 
 const app = express();
 
@@ -59,9 +57,9 @@ app.get("/500", function (req, res) {
    res.render("500");
 });
 
-app.use(function (error, req, res, next) {
-   res.render("500");
-});
+// app.use(function (error, req, res, next) {
+//    res.render("500");
+// });
 
 db.connectToDatabase().then(function () {
    app.listen(3000);

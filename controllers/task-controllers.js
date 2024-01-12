@@ -1,4 +1,4 @@
-const Task = require("../models/deadline");
+const Task = require("../models/task");
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 
