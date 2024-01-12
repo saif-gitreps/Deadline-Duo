@@ -1,8 +1,7 @@
 require("dotenv").config();
-const { Int32 } = require("mongodb");
 const mongoose = require("mongoose");
-const mongoURI = process.env.LOCAL_URI;
-mongoose.connect("mongodb://localhost:27017/deadline-duo");
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI);
 
 const taskSchema = new mongoose.Schema(
    {

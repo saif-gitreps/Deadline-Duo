@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const mongoURI = process.env.LOCAL_URI;
-mongoose.connect("mongodb://localhost:27017/deadline-duo");
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI);
 
 const deadlineSchema = new mongoose.Schema(
    {
