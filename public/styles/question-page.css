@@ -9,6 +9,12 @@ main {
    width: 60rem;
 }
 
+.login-box #question-title {
+   color: #f09433;
+   margin-bottom: 0rem;
+   text-align: start;
+}
+
 .login-box .user-box textarea {
    font-size: 1.3rem;
 }

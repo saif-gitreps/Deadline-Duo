@@ -36,7 +36,7 @@ async function submitQuestion(req, res, next) {
    const userId = req.session.user._id;
    const title = req.body.title;
    const answer = req.body.answer;
-   if (!title) {
+   if (!title || !answer) {
       req.session.questionError = true;
       req.session.questionErrorMessge = "Please fill in all fields";
       req.session.save(function () {
@@ -99,8 +99,7 @@ async function editQuestionPage(req, res, next) {
 
 async function submitQuestionEdit(req, res, next) {
    const title = req.body.title;
-   const dueDate = req.body.dueDate;
-   const description = req.body.description;
+   const answer = req.body.answer;
    // one thing i noticed is, it works without new objectId and with , so i ll just keep using it.
    const questionId = new ObjectId(req.params.id);
 
@@ -114,13 +113,12 @@ async function submitQuestionEdit(req, res, next) {
    }
 
    try {
-      await question.updateOne(
+      await Question.updateOne(
          { _id: questionId },
          {
             $set: {
                title: title,
-               dueDate: dueDate,
-               description: description,
+               answer: answer,
             },
          }
       );

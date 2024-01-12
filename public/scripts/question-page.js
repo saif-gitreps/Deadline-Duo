@@ -1,11 +1,13 @@
-const hideButton = document.getElementById("hide-btn");
-const answerField = document.getElementById("answer");
+document.querySelectorAll(".hide-btn").forEach((hideButton) => {
+   hideButton.addEventListener("click", () => {
+      const answerField = hideButton
+         .closest(".deadline-card")
+         .querySelector(".user-box textarea");
 
-hideButton.addEventListener("click", () => {
-   answerField.classList.toggle("hide");
-   if (hideButton.innerText === "Show Answer") {
-      hideButton.innerText = "Hide Answer";
-   } else {
-      hideButton.innerText = "Show Answer";
-   }
+      answerField.classList.toggle("hide");
+
+      hideButton.innerText = answerField.classList.contains("hide")
+         ? "Show Answer"
+         : "Hide Answer";
+   });
 });
