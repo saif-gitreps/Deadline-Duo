@@ -7,7 +7,9 @@ async function getTaskPage(req, res, next) {
    const taskErrorMessge = req.session.taskErrorMessge;
    const csrfToken = req.csrfToken();
    try {
-      const tasks = await Task.find({ userId: req.session.user._id });
+      const tasks = await Task.find({ userId: req.session.user._id })
+         .sort({ priority: -1 })
+         .exec();
       req.session.taskError = false;
       req.session.taskErrorMessge = null;
 
@@ -29,6 +31,7 @@ async function getTaskPage(req, res, next) {
 async function submitTask(req, res, next) {
    const userId = req.session.user._id;
    const title = req.body.title;
+   const priority = req.body.rate;
    if (!title) {
       req.session.taskError = true;
       req.session.taskErrorMessge = "Please fill in the title";
@@ -40,6 +43,7 @@ async function submitTask(req, res, next) {
    try {
       const newTask = new Task({
          title: title,
+         priority: priority,
          userId: userId,
       });
       await newTask.save();

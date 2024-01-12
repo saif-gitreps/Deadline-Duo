@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { Int32 } = require("mongodb");
 const mongoose = require("mongoose");
 const mongoURI = process.env.LOCAL_URI;
 mongoose.connect("mongodb://localhost:27017/deadline-duo");
@@ -6,6 +7,7 @@ mongoose.connect("mongodb://localhost:27017/deadline-duo");
 const taskSchema = new mongoose.Schema(
    {
       title: String,
+      priority: Number,
       userId: {
          type: mongoose.Schema.Types.ObjectId,
          ref: "User",
