@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Deadlines and Schedules</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+         rel="stylesheet"
+      />
+      <link rel="stylesheet" href="/styles/shared-css.css" />
+      <link rel="stylesheet" href="/styles/deadline-page.css" />
+      <script src="/scripts/deadline-page.js" defer></script>
+   </head>
+   <body>
+      <header>
+         <aside class="dropdown">
+            <!-- <button class="btn" id="dropdown-btn">Menu</button> -->
+            <ul id="dropdown-content">
+               <li>
+                  <a href="/about">About</a>
+               </li>
+               <li>
+                  <a href="/deadline" style="color: #f09433">Deadlines</a>
+               </li>
+               <li><a href="/task">Tasks</a></li>
+               <li><a href="/question">Questions</a></li>
+               <li>
+                  <form method="post" action="/logout" class="logout-form">
+                     <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                     <a onclick="this.parentNode.submit();">Logout</a>
+                  </form>
+               </li>
+            </ul>
+         </aside>
+         <nav>
+            <section>
+               <div class="default-button">
+                  <a href="/about">About</a>
+               </div>
+               <ul>
+                  <li>
+                     <a href="/deadline" style="color: #f09433">Deadlines</a>
+                  </li>
+                  <li><a href="/task">Tasks</a></li>
+                  <li><a href="/question">Questions</a></li>
+               </ul>
+               <div class="default-button">
+                  <form method="post" action="/logout" class="logout-form">
+                     <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                     <a onclick="this.parentNode.submit();">Logout</a>
+                  </form>
+               </div>
+            </section>
+         </nav>
+      </header>
+      <main>
+         <!-- this is not a login box, but i am lazy to change the class name lol -->
+         <div class="login-box">
+            <p>Add a deadline</p>
+            <form id="deadline-form" method="POST" action="/deadline">
+               <input type="hidden" value="<%=csrfToken%>" name="_csrf" />
+               <div class="user-box">
+                  <input required name="title" type="text" id="deadline-form-title"/>
+                  <label>Title</label>
+               </div>
+               <div class="date-box">
+                  <input type="datetime-local" name="dueDate" id="deadline-form-dueDate"/>
+               </div>
+               <div class="user-box">
+                  <input required name="description" type="text" id="deadline-form-description"/>
+                  <label>Description</label>
+               </div>
+               <% if(deadlineError) {%>
+                  <p class="error-message"><%=deadlineErrorMessage%></p>
+               <% } %>
+               <div class="user-box">
+                  <button class="btn">+ Add Deadline</button>
+               </div>
+            </form>
+         </div>
+         <!-- All the deadline cards ejs will be added from here -->
+         <%if(deadlines && deadlines.length > 0) {%>
+            <%for(let i = 0; i < deadlines.length; i++) {%>
+               <div class="login-box" style="background-color:<%=deadlines[i].color%>;">
+                  <p><%=deadlines[i].dueDate.toLocaleDateString("en-UK", {
+                     day: "numeric",
+                     month: "numeric",
+                     year: "2-digit",
+                  });%> <%=deadlines[i].dueDate.toLocaleTimeString("en-UK", {
+                     hour: "numeric",
+                     minute: "numeric",
+                     hour12: true,
+                  }).replace(/^0/, '12')%></p>
+                  <form class="deadline-card" 
+                        action="/deadline/<%=deadlines[i]._id%>/delete" 
+                        method="post">
+                     <input type="hidden" value="<%=csrfToken%>" name="_csrf" />
+                     <div class="user-box">
+                        <input type="text" value="<%=deadlines[i].title%>" readonly />
+                     </div>
+                     <div class="user-box">
+                        <input
+                           required
+                           name=""
+                           type="text"
+                           value="Time left: <%=deadlines[i].timeLeft%>"
+                           readonly
+                        />
+                     </div>
+                     <div class="user-box">
+                        <input
+                           required
+                           name="description"
+                           type="text"
+                           value="<%=deadlines[i].description%>"
+                        />
+                     </div>
+                     <div class="user-box">
+                        <button type="submit" class="btn" style="color: rgb(199, 37, 37)">X Delete</button>
+                        <button
+                           type="button"
+                           id="edit-btn"
+                           class="btn"
+                           style="padding-left: 1rem; padding-right: 1rem"
+                        >
+                           <div class="default-button">
+                              <a href="/deadline/<%=deadlines[i]._id%>/edit">O Edit</a>
+                           </div>
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            <%} }%>
+      </main>
+      <footer></footer>
+   </body>
+</html>

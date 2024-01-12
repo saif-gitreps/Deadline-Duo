@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+         rel="stylesheet"
+      />
+      <link rel="stylesheet" href="/styles/shared-css.css" />
+      <link rel="stylesheet" href="/styles/login-and-register.css   " />
+      <title>Login</title>
+   </head>
+   <body>
+      <main>
+         <div class="login-box">
+            <p>Login</p>
+            <form method="post" action="/login">
+               <input type="hidden" value="<%= csrfToken %>" name="_csrf" />
+               <div class="user-box">
+                  <input required name="email" type="text" value="<%=inputData.email%>"/>
+                  <label>Email</label>
+               </div>
+               <div class="user-box">
+                  <input required name="password" type="password" />
+                  <label>Password</label>
+               </div>
+               <% if(inputData.hasError) {%>
+                  <p class="error-message"><%=inputData.message%></p>
+               <% } %>
+               <button class="btn">Submit</button>
+            </form>
+            <p>Don't have an account? <a href="/signup" class="a2">Sign up!</a></p>
+         </div>
+      </main>
+   </body>
+</html>

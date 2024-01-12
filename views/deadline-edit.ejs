@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/styles/shared-css.css" />
+      <link rel="stylesheet" href="/styles/deadline-page.css" />
+      <title>Edit Deadline</title>
+   </head>
+   <body>
+      <header>
+         <nav>
+            <section>
+               <div class="default-button">
+                  <a href="/deadline"> Back </a>
+               </div>
+               <ul>
+                  <li>..</li>
+                  <li>..</li>
+               </ul>
+            </section>
+         </nav>
+      </header>
+      <main style="display: flex">
+         <div class="login-box">
+            <p>Edit</p>
+            <form action="/deadline/<%=deadline._id%>/edit" method="POST">
+               <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+               <div class="user-box">
+                  <input required name="title" type="text" value="<%=deadline.title%>" />
+                  <label>Title:</label>
+               </div>
+               <div class="user-box">
+                  <input
+                     
+                     value="<%=deadline.dueDate.toLocaleDateString("en-UK", {
+                           day: "numeric",
+                           month: "numeric",
+                           year: "2-digit",
+                        });%> <%=deadline.dueDate.toLocaleTimeString("en-UK", {
+                           hour: "numeric",
+                           minute: "numeric",
+                           hour12: true,
+                         }).replace(/^0/, '12')%>"
+                  />
+                  <label>Current Date:</label>
+               </div>
+               <div class="date-box">
+                  <label for="datetime">New Date:</label>
+                  <input required type="datetime-local" id="datetime" name="dueDate" />
+               </div>
+               <div class="user-box">
+                     <input
+                        required
+                        name="description"
+                        type="text"
+                        value="<%=deadline.description%>"
+                     />
+                     </div>
+               <div class="user-box">
+                  <button class="btn">Save &#10003;</button>
+               </div>
+            </form>
+         </div>
+      </main>
+      <footer></footer>
+   </body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Tasks</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+         rel="stylesheet"
+      />
+      <link rel="stylesheet" href="/styles/shared-css.css" />
+      <link rel="stylesheet" href="/styles/task-page.css" />
+      <script src="deadline-page.js" defer></script>
+   </head>
+   <body>
+      <header>
+         <aside class="dropdown">
+            <!-- <button class="btn" id="dropdown-btn">Menu</button> -->
+            <ul id="dropdown-content">
+               <li>
+                  <a href="/about">About</a>
+               </li>
+               <li>
+                  <a href="/deadline">Deadlines</a>
+               </li>
+               <li><a href="/task" style="color: #f09433">Tasks</a></li>
+               <li><a href="/question">Questions</a></li>
+               <li>
+                  <form method="post" action="/logout" class="logout-form">
+                     <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                     <a onclick="this.parentNode.submit();">Logout</a>
+                  </form>
+               </li>
+            </ul>
+         </aside>
+         <nav>
+            <section>
+               <div class="default-button">
+                  <a href="/about">About</a>
+               </div>
+               <ul>
+                  <li>
+                     <a href="/deadline">Deadlines</a>
+                  </li>
+                  <li><a href="/task" style="color: #f09433">Tasks</a></li>
+                  <li><a href="/question">Questions</a></li>
+               </ul>
+               <div class="default-button">
+                  <form method="post" action="/logout" class="logout-form">
+                     <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                     <a onclick="this.parentNode.submit();">Logout</a>
+                  </form>
+               </div>
+            </section>
+         </nav>
+      </header>
+      <main>
+         <!-- this is not a login box practically but i am lazy to change name lol -->
+         <div class="login-box">
+            <p>Add a task</p>
+            <form action="/task" method="POST">
+               <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+               <div class="user-box">
+                  <input required name="title" type="text" />
+                  <label>Title</label>
+               </div>
+               <div class="priority-checkbox">
+                  <label id="priority-label" for="">Priority: </label>
+                  <div class="rating">
+                     <input value="5" name="rate" id="star5" type="radio" />
+                     <label title="text" for="star5"></label>
+                     <input value="4" name="rate" id="star4" type="radio" />
+                     <label title="text" for="star4"></label>
+                     <input value="3" name="rate" id="star3" type="radio" checked="" />
+                     <label title="text" for="star3"></label>
+                     <input value="2" name="rate" id="star2" type="radio" />
+                     <label title="text" for="star2"></label>
+                     <input value="1" name="rate" id="star1" type="radio" />
+                     <label title="text" for="star1"></label>
+                  </div>
+               </div>
+               <% if(taskError) {%>
+                  <p class="error-message"><%=taskErrorMessage%></p>
+               <% } %>
+               <div class="user-box">
+                  <button class="btn">+ Add Task</button>
+               </div>
+            </form>
+         </div>
+         <!-- All the task cards ejs will be added from here -->
+         <%if(tasks && tasks.length > 0) {%>
+            <%for(let i = 0; i < tasks.length; i++) {%>
+               <div class="login-box">
+                  <p>Task</p>
+                  <form class="deadline-card" action="/task/<%=tasks[i]._id%>/delete" method="post">
+                     <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                     <div class="user-box">
+                        <input required name="title" type="text" value="<%=tasks[i].title%>" readonly />
+                     </div>
+                     <div class="priority-checkbox">
+                        <label id="priority-label" for="">Priority: </label>
+                        <div class="rating">
+                           <%for(let j = tasks[i].priority; j >= 1; j--) {%>
+                              <input value="<%=j%>" name="postrate" id="star<%=j%>" type="radio" />
+                              <label title="text" for="star<%=j%>" style="color: #f09433;"></label>
+                           <%}%>
+                        </div>
+                     </div>
+                     <div class="user-box">
+                        <button class="btn" style="color: rgb(199, 37, 37)">X Delete</button>
+                     </div>
+                  </form>
+               </div>
+            <%} }%>
+      </main>
+      <footer></footer>
+   </body>
+</html>

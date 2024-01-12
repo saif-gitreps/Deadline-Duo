@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+         rel="stylesheet"
+      />
+      <link rel="stylesheet" href="/styles/shared-css.css" />
+      <link rel="stylesheet" href="/styles/login-and-register.css" />
+      <title>Register</title>
+   </head>
+   <body>
+      <main>
+         <div class="login-box">
+            <p>Create an account</p>
+            <form action="/signup" method="POST">
+               <input type="hidden" value="<%= csrfToken %>" name="_csrf" />
+               <div class="user-box">
+                  <input required name="name" type="text" value="<%=inputData.name%>"/>
+                  <label>Name</label>
+               </div>
+               <div class="user-box">
+                  <input required name="email" type="text" value="<%=inputData.name%>"/>
+                  <label>Email</label>
+               </div>
+               <div class="user-box">
+                  <input required name="password" type="password" />
+                  <label>Password</label>
+               </div>
+               <div class="user-box">
+                  <input required name="confirmpassword" type="password" />
+                  <label>Confirm Password</label>
+               </div>
+               <% if(inputData.hasError) { %>
+                  <p class="error-message"> <%=inputData.message%></p>
+               <% } %>
+                  <button class="btn">Submit</button>
+            </form>
+            <p>Already have an account? <a href="/" class="a2">Login</a></p>
+         </div>
+      </main>
+   </body>
+</html>

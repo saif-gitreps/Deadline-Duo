@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/styles/shared-css.css" />
+      <link rel="stylesheet" href="/styles/question-page.css" />
+      <title>Edit Notes/Question</title>
+   </head>
+   <body>
+      <header>
+         <nav>
+            <section>
+               <div class="default-button">
+                  <a href="/question"> Back </a>
+               </div>
+               <ul>
+                  <li>..</li>
+                  <li>..</li>
+               </ul>
+            </section>
+         </nav>
+      </header>
+      <main style="display: flex">
+         <div class="login-box">
+            <p>Edit</p>
+            <form action="/question/<%=question._id%>/edit" method="post">
+               <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+               <div class="user-box">
+                  <input required name="title" type="text" value="<%=question.title%>" />
+                  <label>Title:</label>
+               </div>
+               <div class="user-box">
+                  <textarea name="answer" cols="40" rows="9">
+<%=question.answer%></textarea
+                  >
+               </div>
+               <div class="user-box">
+                  <button class="btn">Save &#10003;</button>
+               </div>
+            </form>
+         </div>
+      </main>
+      <footer></footer>
+   </body>
+</html>
