@@ -1,0 +1,10 @@
+main {
+   width: 60%;
+   padding: 1.4rem;
+   margin: 0 auto;
+   color: aliceblue;
+   background-color: black;
+   display: block;
+   text-align: center;
+   border-radius: 40px;
+}

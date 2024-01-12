@@ -51,17 +51,18 @@ app.use(deadlineRoutes);
 app.use(taskRoutes);
 app.use(questionRoutes);
 
+app.get("/about", (req, res) => {
+   res.render("about");
+});
 app.get("/401", (req, res) => {
    res.render("401");
 });
-
-// app.get("/500", function (req, res) {
-//    res.render("500");
-// });
-
-// app.use(function (error, req, res, next) {
-//    res.render("500");
-// });
+app.get("/500", (req, res) => {
+   res.render("500");
+});
+app.use((error, req, res, next) => {
+   res.render("500");
+});
 
 db.connectToDatabase().then(function () {
    app.listen(3000);
