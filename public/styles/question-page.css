@@ -54,6 +54,6 @@ textarea::-webkit-scrollbar-track {
 @media screen and (max-width: 51.875rem) {
    .login-box,
    .card {
-      width: 30rem;
+      width: 22rem;
    }
 }

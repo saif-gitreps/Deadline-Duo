@@ -216,24 +216,30 @@ button:hover {
    main {
       grid-template-columns: repeat(1, 1fr);
    }
+   .login-box {
+      width: 350px;
+      padding: 2rem;
+   }
+   header {
+      width: 100%;
+   }
    .dropdown {
-      box-sizing: border-box;
-      margin: 0 auto;
+      margin: 0 0;
       display: block;
-      width: auto;
+      box-sizing: border-box;
+      width: 100%;
    }
    aside ul {
-      box-sizing: border-box;
       display: grid;
+      box-sizing: border-box;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 1rem;
       padding: 0;
    }
    aside ul li {
       display: flex;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
+      text-align: left;
+      /* justify-content: center; */
    }
    aside ul li a {
       font-size: 1.5rem;
