@@ -138,7 +138,7 @@ button::before {
 .login-box .user-box textarea {
    width: 100%;
    padding: 10px 0;
-   font-size: 1.4rem;
+   font-size: 1.3rem;
    color: #fff;
    margin-bottom: 30px;
    border: none;
@@ -239,7 +239,7 @@ button:hover {
    aside ul li {
       display: flex;
       text-align: left;
-      /* justify-content: center; */
+      justify-content: center;
    }
    aside ul li a {
       font-size: 1.5rem;

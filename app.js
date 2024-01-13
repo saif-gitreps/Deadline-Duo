@@ -44,13 +44,6 @@ app.use(
    })
 );
 
-app.use(csurf("123456789iamasecret987654321look"));
-app.use(authorize);
-app.use(userAuthRoutes);
-app.use(deadlineRoutes);
-app.use(taskRoutes);
-app.use(questionRoutes);
-
 app.get("/about", (req, res) => {
    res.render("about");
 });
@@ -60,6 +53,13 @@ app.get("/401", (req, res) => {
 app.get("/500", (req, res) => {
    res.render("500");
 });
+app.use(csurf("123456789iamasecret987654321look"));
+app.use(authorize);
+app.use(userAuthRoutes);
+app.use(deadlineRoutes);
+app.use(taskRoutes);
+app.use(questionRoutes);
+
 app.use((error, req, res, next) => {
    res.render("500");
 });

@@ -116,6 +116,7 @@
                            name="description"
                            type="text"
                            value="<%=deadlines[i].description%>"
+                           readonly
                         />
                      </div>
                      <div class="user-box">
@@ -127,7 +128,7 @@
                            style="padding-left: 1rem; padding-right: 1rem"
                         >
                            <div class="default-button">
-                              <a href="/deadline/<%=deadlines[i]._id%>/edit">O Edit</a>
+                              <a href="/deadline/<%=deadlines[i]._id%>/edit" style="font-size: 1.3rem;">O Edit</a>
                            </div>
                         </button>
                      </div>

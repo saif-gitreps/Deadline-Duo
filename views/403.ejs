@@ -10,12 +10,54 @@
          rel="stylesheet"
       />
       <link rel="stylesheet" href="/styles/shared-css.css" />
-      <link rel="stylesheet" href="/styles/login-and-register.css   " />
-      <title>Login</title>
+      <link rel="stylesheet" href="/styles/deadline-page.css   " />
+      <link rel="stylesheet" href="/styles/about.css   " />
+
+      <title>403 Unauthorized</title>
    </head>
    <body>
+      <header>
+         <aside class="dropdown">
+            <!-- <button class="btn" id="dropdown-btn">Menu</button> -->
+            <ul id="dropdown-content">
+               <li>
+                  <a href="/about">About</a>
+               </li>
+               <li>
+                  <a href="/deadline">Deadlines</a>
+               </li>
+               <li><a href="/task">Tasks</a></li>
+               <li><a href="/question">Questions</a></li>
+               <li>
+                  <div class="default-button">
+                     <a>Logout</a>
+                  </div>
+               </li>
+            </ul>
+         </aside>
+         <nav>
+            <section>
+               <div class="default-button">
+                  <a href="/about">About</a>
+               </div>
+               <ul>
+                  <li>
+                     <a href="/deadline" style="color: #f09433">Deadlines</a>
+                  </li>
+                  <li><a href="/task">Tasks</a></li>
+                  <li><a href="/question">Questions</a></li>
+               </ul>
+               <div class="default-button">
+                  <a href="/">Login</a>
+               </div>
+            </section>
+         </nav>
+      </header>
       <main>
-         <h1>403 Unauthorized</h1>
+         <h1>
+            You are not authorized, Please click login or
+            <a href="/signup" style="color: #f09433">create an account</a>.
+         </h1>
       </main>
    </body>
 </html>

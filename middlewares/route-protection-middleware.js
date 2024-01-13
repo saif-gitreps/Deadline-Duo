@@ -1,6 +1,6 @@
 function protectRoute(req, res, next) {
    if (!res.locals.isAuthenticated) {
-      res.status(401).render("/401");
+      res.redirect("/401");
    } else {
       next();
    }
