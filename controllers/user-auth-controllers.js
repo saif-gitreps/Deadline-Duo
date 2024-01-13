@@ -39,7 +39,7 @@ function getSignUp(req, res) {
    res.render("register", { inputData: sessionInputData, csrfToken: req.csrfToken() });
 }
 
-async function submitLogin(req, res) {
+async function submitLogin(req, res, next) {
    const email = req.body.email;
    const password = req.body.password;
 
