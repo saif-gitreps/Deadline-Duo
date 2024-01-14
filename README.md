@@ -1,7 +1,7 @@
 # Deadline-Duo
 
 **Description:**
-Deadline-Duo is an Express.js web application designed to help users efficiently manage their deadlines, tasks, and study notes. The application follows the MVC (Model-View-Controller) pattern, providing a structured architecture for scalability and maintainability. MongoDB serves as the backend database for storing and retrieving data.
+Deadline-Duo is an Express.js web application designed to help users efficiently manage their deadlines, tasks, and study notes. The application follows the MVC (Model-View-Controller) pattern, providing a structured architecture for scalability and maintainability. MongoDB serves as the backend database for storing and retrieving data. 
 
 **Features:**
 
@@ -36,23 +36,24 @@ The project adheres to the MVC architectural pattern, which separates concerns i
 **Installation:**
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/Deadline-Duo.git
-   ```
+```bash
+git clone https://github.com/your-username/Deadline-Duo.git
+```
 
 2. Navigate to the project directory:
-  ```bash
-   cd Deadline-Duo
-  ```
+```bash
+cd Deadline-Duo
+```
 3. Install dependencies::
-  ```bash
-   npm install
-  ```
+```bash
+npm install
+```
 4. Run the application:
-   ```bash
-   npm start
-    ```
+```bash
+npm start
+```
 6. Access the application in your web browser at `http://localhost:3000`.
+
 
 7. Or you can try the App demo from here https://deadline-duo.onrender.com/
   [note: The app is deployed on a free machine the demo is only useful for only a single person use]
@@ -60,6 +61,7 @@ The project adheres to the MVC architectural pattern, which separates concerns i
 **Requirements:**
 - Node.js and npm installed on your machine.
 - MongoDB instance configured with connection details.
+- A continuous hosting plan of your own.
 
 **Contributing:**
 Feel free to contribute to the project by submitting issues or creating pull requests. Your feedback and contributions are highly appreciated!
