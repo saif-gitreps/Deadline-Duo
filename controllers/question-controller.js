@@ -2,7 +2,7 @@ const Question = require("../models/question");
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 
-async function getQuestionPage(req, res) {
+async function getQuestionPage(req, res, next) {
    const questionError = req.session.questionError;
    const questionErrorMessge = req.session.questionErrorMessge;
    const csrfToken = req.csrfToken();
@@ -10,13 +10,6 @@ async function getQuestionPage(req, res) {
       const questions = await Question.find({ userId: req.session.user._id });
       req.session.questionError = false;
       req.session.questionErrorMessge = null;
-      //   for (question of questions) {
-      //      const daysDiff = calculateDaysLeft(question.dueDate);
-      //      const hoursDiff = calculateHoursLeft(question.dueDate);
-      //      question.color = setColor(daysDiff);
-      //      question.timeLeft =
-      //         daysDiff <= 0 && hoursDiff < 0 ? "Time over" : `${daysDiff}d ${hoursDiff}h`;
-      //   }
       res.render("question-page", {
          userId: req.session.user._id,
          questions: questions,

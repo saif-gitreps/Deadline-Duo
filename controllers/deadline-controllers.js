@@ -5,7 +5,7 @@ const calculateDaysLeft = require("../util/days-difference-calculator");
 const calculateHoursLeft = require("../util/hour-difference-calculator");
 const setColor = require("../util/set-card-colour");
 
-async function getDeadlinePage(req, res) {
+async function getDeadlinePage(req, res, next) {
    const deadlineError = req.session.deadlineError;
    const deadlineErrorMessge = req.session.deadlineErrorMessge;
    const csrfToken = req.csrfToken();
@@ -111,7 +111,7 @@ async function submitDeadlineEdit(req, res, next) {
    // one thing i noticed is, it works without new objectId and with , so i ll just keep using it.
    const deadlineId = new ObjectId(req.params.id);
 
-   if (!title || !dueDate) {
+   if (!title) {
       req.session.deadlineError = true;
       req.session.deadlineErrorMessge = "Please fill in all fields";
       req.session.save(function () {
