@@ -60,9 +60,9 @@ app.use(deadlineRoutes);
 app.use(taskRoutes);
 app.use(questionRoutes);
 
-app.use((error, req, res, next) => {
-   res.render("500");
-});
+// app.use((error, req, res, next) => {
+//    res.render("500");
+// });
 
 db.connectToDatabase().then(function () {
    app.listen(3000);

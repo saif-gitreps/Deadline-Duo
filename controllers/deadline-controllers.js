@@ -16,6 +16,10 @@ async function getDeadlinePage(req, res, next) {
       req.session.deadlineError = false;
       req.session.deadlineErrorMessge = null;
       for (deadline of deadlines) {
+         if (!deadline.dueDate) {
+            deadline.dueDate = new Date("1969-01-01");
+            continue;
+         }
          const daysDiff = calculateDaysLeft(deadline.dueDate);
          const hoursDiff = calculateHoursLeft(deadline.dueDate);
          deadline.color = setColor(daysDiff);
@@ -90,6 +94,9 @@ async function editDeadlinePage(req, res, next) {
       if (!deadline) {
          return res.redirect("/500");
       }
+      if (!deadline.dueDate) {
+         deadline.dueDate = new Date("1969-01-01");
+      }
       req.session.deadlineError = false;
       req.session.deadlineErrorMessge = null;
       return res.render("deadline-edit", {
@@ -110,7 +117,9 @@ async function submitDeadlineEdit(req, res, next) {
    const description = req.body.description;
    // one thing i noticed is, it works without new objectId and with , so i ll just keep using it.
    const deadlineId = new ObjectId(req.params.id);
-
+   if (!dueDate) {
+      dueDate = req.body.currentDueDate;
+   }
    if (!title) {
       req.session.deadlineError = true;
       req.session.deadlineErrorMessge = "Please fill in all fields";
