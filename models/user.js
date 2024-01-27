@@ -1,7 +1,14 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 const mongoURI = process.env.MONGO_URI;
-mongoose.connect(mongoURI);
+(async () => {
+   try {
+      await mongoose.connect(`${mongoURI}`);
+   } catch (error) {
+      console.log("DB ERRO :" + error);
+      throw error;
+   }
+})();
 
 const userSchema = new mongoose.Schema(
    {

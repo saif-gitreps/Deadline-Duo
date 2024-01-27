@@ -15,7 +15,7 @@ async function getDeadlinePage(req, res, next) {
          .exec();
       req.session.deadlineError = false;
       req.session.deadlineErrorMessge = null;
-      for (deadline of deadlines) {
+      for (let deadline of deadlines) {
          if (!deadline.dueDate) {
             deadline.dueDate = new Date("1969-01-01");
             continue;
