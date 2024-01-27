@@ -113,7 +113,7 @@ async function editDeadlinePage(req, res, next) {
 
 async function submitDeadlineEdit(req, res, next) {
    const title = req.body.title;
-   const dueDate = req.body.dueDate;
+   let dueDate = req.body.dueDate;
    const description = req.body.description;
    // one thing i noticed is, it works without new objectId and with , so i ll just keep using it.
    const deadlineId = new ObjectId(req.params.id);
