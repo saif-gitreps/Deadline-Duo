@@ -48,11 +48,23 @@ cd Deadline-Duo
 ```bash
 npm install
 ```
-4. Run the application:
+
+4. Create a '.env' file in your root directory and configure the following variables:
+```bash
+PORT = 3000
+LOCAL_URI = mongodb://localhost:27017 
+MONGO_URI = <Your mongo db URL>
+DBS_NAME = <Your Database name>
+DB_USER = <Your Database user>
+DB_PASS = <Your Database password>
+```
+
+5. Run the application:
 ```bash
 npm start
 ```
-6. Access the application in your web browser at `http://localhost:3000`.
+
+6. Access the application in your web browser at `http://localhost:3000` Or deploy it manually in your preferred cloud hosting provider.
 
 
 7. Or you can try the App demo from here https://deadline-duo.onrender.com/
