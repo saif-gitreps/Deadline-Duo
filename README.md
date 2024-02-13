@@ -53,7 +53,7 @@ npm install
 ```bash
 PORT = 3000
 LOCAL_URI = mongodb://localhost:27017 
-MONGO_URI = <Your mongo db URL>
+MONGO_URI = <Your MongoDB URL>/<Your Database name>
 DBS_NAME = <Your Database name>
 DB_USER = <Your Database user>
 DB_PASS = <Your Database password>
